@@ -75,7 +75,7 @@ function setClock(selector, endtime) {
           days = timer.querySelector("#days"),
           hours = timer.querySelector('#hours'),
           minutes = timer.querySelector('#minutes'),
-          seconds = timer.querySelector('#seconds');
+          seconds = timer.querySelector('#seconds'),//?
           
           timeInterval = setInterval(updateClock, 1000);
 
@@ -99,3 +99,44 @@ function setClock(selector, endtime) {
 
 
 setClock('.timer', deadline);
+
+//Modal window
+
+
+const modalTrigger  = document.querySelectorAll('[data-modal]'),
+      modalCloseBtn  = document.querySelector('[data-close]'),
+      modal = document.querySelector('.modal');
+
+      
+
+modalTrigger.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+        modal.classList.add('show');
+        modal.classList.remove('.hide');
+        document.body.style.overflow = 'hidden';
+        
+    });
+})
+
+function closeModal () {
+    modal.classList.add('hide');
+    modal.classList.remove('show');
+    modal.classList.remove('hide'); 
+    document.body.style.overflow = '';
+}
+
+modalCloseBtn.addEventListener('click', closeModal);
+
+modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+        closeModal();
+    }
+});
+
+document.addEventListener('keydown', (e) => {
+    if(e.code === 'Escape' && modal.classList.contains('show')) {
+        closeModal();
+    }
+})
+
+
